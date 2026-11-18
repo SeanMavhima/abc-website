@@ -1,0 +1,284 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * Brand colours are CSS variables so administrators can change them in
+ * Website settings. The root layout writes overrides onto <html>.
+ */
+:root {
+  --brand-forest: #173d32;
+  --brand-evergreen: #245443;
+  --brand-sage: #a8b99b;
+  --brand-ivory: #f7f7f0;
+  --brand-earth: #795c43;
+  --brand-charcoal: #202923;
+  /* Fixed accents (not editable in settings): muted gold and natural sand */
+  --brand-gold: #c2a05a;
+  --brand-sand: #e6dcc6;
+  --brand-night: #0d211b;
+
+  /* Admin / UI tokens (shadcn-style) */
+  --background: #ffffff;
+  --foreground: #202923;
+  --muted: #f3f4f1;
+  --muted-foreground: #5d6660;
+  --border: #e2e5df;
+  --input: #d7dbd3;
+  --ring: var(--brand-evergreen);
+  --primary: var(--brand-forest);
+  --primary-foreground: #ffffff;
+  --destructive: #b42318;
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --color-forest: var(--brand-forest);
+  --color-evergreen: var(--brand-evergreen);
+  --color-sage: var(--brand-sage);
+  --color-ivory: var(--brand-ivory);
+  --color-earth: var(--brand-earth);
+  --color-charcoal: var(--brand-charcoal);
+  --color-gold: var(--brand-gold);
+  --color-sand: var(--brand-sand);
+  --color-night: var(--brand-night);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), ui-serif, Georgia, serif;
+  --font-mono: var(--font-label), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@theme {
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--brand-ivory);
+    color: var(--brand-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 50;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--brand-sage) 60%, transparent);
+    color: var(--brand-forest);
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-evergreen);
+    outline-offset: 3px;
+  }
+  [data-reduce-motion="true"] {
+    scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container-site { padding-inline: 2rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-site { padding-inline: 3rem; }
+  }
+
+  /* Small "specimen label" text: section labels, statuses, measurements */
+  .eyebrow,
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .sci-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+  }
+  /* The admin dashboard keeps a plain sans-serif for headings. */
+  .admin-scope {
+    --font-heading: var(--font-body);
+  }
+  .admin-scope h1,
+  .admin-scope h2,
+  .admin-scope h3,
+  .admin-scope h4 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+  }
+
+  /* Rich text rendered from the CMS */
+  .prose-abc {
+    --tw-prose-body: color-mix(in oklab, var(--brand-charcoal) 88%, transparent);
+    --tw-prose-headings: var(--brand-forest);
+    --tw-prose-links: var(--brand-evergreen);
+    --tw-prose-bold: var(--brand-charcoal);
+    --tw-prose-quotes: var(--brand-forest);
+    --tw-prose-quote-borders: var(--brand-sage);
+    --tw-prose-bullets: var(--brand-sage);
+    --tw-prose-counters: var(--brand-earth);
+    --tw-prose-hr: var(--border);
+  }
+  .prose-abc :where(a):not(:where([class~="not-prose"] *)) {
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-abc :where(blockquote):not(:where([class~="not-prose"] *)) {
+    font-family: var(--font-display);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.35em;
+    line-height: 1.4;
+  }
+  .prose-abc :where(img):not(:where([class~="not-prose"] *)) {
+    border-radius: 1rem;
+  }
+
+  .prose-invert-abc {
+    --tw-prose-body: color-mix(in oklab, white 82%, transparent);
+    --tw-prose-headings: white;
+    --tw-prose-links: var(--brand-sage);
+    --tw-prose-bold: white;
+    --tw-prose-bullets: var(--brand-sage);
+  }
+
+  /* Tiptap editor (admin) */
+  .tiptap-content .ProseMirror {
+    min-height: 12rem;
+    outline: none;
+    padding: 1rem;
+  }
+  .tiptap-content .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: var(--muted-foreground);
+    pointer-events: none;
+    float: left;
+    height: 0;
+  }
+}
+
+/* Hero slideshow */
+@keyframes abc-kenburns {
+  from {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(var(--kb-x, 0), var(--kb-y, 0), 0);
+  }
+}
+@keyframes abc-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes abc-scroll {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(200%);
+  }
+}
+[data-reduce-motion="true"] [style*="abc-scroll"],
+[data-reduce-motion="true"] .animate-\[abc-scroll_2\.2s_ease-in-out_infinite\] {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[abc-scroll_2\.2s_ease-in-out_infinite\] {
+    animation: none !important;
+  }
+}
+
+/* 3D hero */
+@keyframes abc-pulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+[data-reduce-motion="true"] .abc-pulse {
+  animation: none !important;
+}
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { background: white; }
+}
+
+/*
+ * Rich text colours. Declared outside any layer on purpose: the typography
+ * plugin sets its own colours in the utilities layer, which would otherwise
+ * win over the brand colours above (most visibly on dark backgrounds).
+ */
+.prose.prose-abc {
+  --tw-prose-body: color-mix(in oklab, var(--brand-charcoal) 88%, transparent);
+  --tw-prose-headings: var(--brand-forest);
+  --tw-prose-links: var(--brand-evergreen);
+  --tw-prose-bold: var(--brand-charcoal);
+  --tw-prose-quotes: var(--brand-forest);
+  --tw-prose-quote-borders: var(--brand-gold);
+  --tw-prose-bullets: var(--brand-gold);
+  --tw-prose-counters: var(--brand-earth);
+}
+.prose.prose-abc.prose-invert-abc {
+  --tw-prose-body: color-mix(in oklab, white 82%, transparent);
+  --tw-prose-headings: white;
+  --tw-prose-links: var(--brand-sand);
+  --tw-prose-bold: white;
+  --tw-prose-quotes: white;
+  --tw-prose-bullets: var(--brand-gold);
+}
+.prose.prose-abc :where(h2, h3, h4) {
+  font-weight: 500;
+}

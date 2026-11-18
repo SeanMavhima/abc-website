@@ -1,0 +1,64 @@
+{
+  "name": "abc-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Official website and CMS for ABC — Alliance for Biodiversity and Conservation",
+  "scripts": {
+    "dev": "node scripts/next.mjs dev",
+    "build": "node scripts/next.mjs build",
+    "start": "node scripts/next.mjs start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "seed": "node scripts/seed.mts",
+    "seed:sql": "node scripts/generate-seed-sql.mts",
+    "create-admin": "node scripts/create-admin.mts"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "3.10.0",
+    "@radix-ui/react-slot": "1.2.3",
+    "@react-three/fiber": "9.8.2",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0",
+    "@tiptap/core": "3.34.0",
+    "@tiptap/extension-image": "3.34.0",
+    "@tiptap/pm": "3.34.0",
+    "@tiptap/react": "3.34.0",
+    "@tiptap/starter-kit": "3.34.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "framer-motion": "12.23.24",
+    "lucide-react": "0.544.0",
+    "next": "15.5.29",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-hook-form": "7.63.0",
+    "sanitize-html": "2.17.0",
+    "server-only": "0.0.1",
+    "sonner": "2.0.7",
+    "tailwind-merge": "3.3.1",
+    "three": "0.187.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.3.1",
+    "@tailwindcss/postcss": "4.1.14",
+    "@tailwindcss/typography": "0.5.19",
+    "@types/node": "22.18.8",
+    "@types/react": "19.1.17",
+    "@types/react-dom": "19.1.11",
+    "@types/sanitize-html": "2.16.0",
+    "@types/three": "0.187.0",
+    "eslint": "9.37.0",
+    "eslint-config-next": "15.5.29",
+    "tailwindcss": "4.1.14",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "motion-dom": "12.23.23",
+    "motion-utils": "12.23.6"
+  }
+}
